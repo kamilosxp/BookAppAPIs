@@ -13,11 +13,13 @@
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Repository\" />
     <None Remove="Swashbuckle.AspNetCore" />
+    <None Remove="Controllers\BookProvider\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
     <Folder Include="Models\" />
     <Folder Include="Repository\" />
+    <Folder Include="Controllers\Providers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
