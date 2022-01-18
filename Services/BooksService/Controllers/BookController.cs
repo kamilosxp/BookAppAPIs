@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BooksService.Controllers.Providers;
 using BooksService.Models;
 using BooksService.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -30,8 +31,20 @@ namespace BooksService.Controllers
         [HttpPost]
         public async Task<object> Post([FromBody] Book book)
         {
+            var isbn = book.ISBN;
+            book.Image = await GetPhotoImage(isbn);
 
-            return book;
+            var content = await _bookRepository.CreateUpdateProduct(book);
+
+            return content;
+        }
+
+        private async Task<byte[]> GetPhotoImage(string isbn)
+        {
+            var apiAddress = "https://covers.openlibrary.org/";
+            var bookDataProvider = new BookDataProvider(apiAddress);
+
+            return await bookDataProvider.GetBookImage(isbn, CoverPhotoSize.MEDIUM);
         }
     }
 }

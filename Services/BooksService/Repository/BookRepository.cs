@@ -18,7 +18,12 @@ namespace BooksService.Repository
 
         public async Task<Book> CreateUpdateProduct(Book book)
         {
-            await _databaseContext.Books.AddAsync(book);
+            var checkIsExist = await _databaseContext.Books.FirstOrDefaultAsync(x => x.Id == book.Id);
+
+            if(checkIsExist == null)
+                await _databaseContext.Books.AddAsync(book);
+
+            await _databaseContext.SaveChangesAsync();
             return book;
         }
 

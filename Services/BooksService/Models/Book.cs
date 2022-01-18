@@ -7,6 +7,6 @@ namespace BooksService.Models
         public string ISBN { get; set; }
         public string Name { get; set; }
         public Category Category { get; set; }
-        public string ImageURL { get; set; }
+        public byte[] Image { get; set; }
     }
 }
